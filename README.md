@@ -1,5 +1,4 @@
 # Customer-Impact-Analysis-Table
-# Customer Return Percentage Dashboard
 ## Project Description
 This project is a Flask-based web application that displays a dynamic table of customer return percentages by month. The table highlights return rates with conditional formatting, helping to identify trends and alerting to high-impact return periods.
 
