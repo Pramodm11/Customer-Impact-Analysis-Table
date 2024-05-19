@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customer Impact Table</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .high-impact {
+            background-color: #ffcccc; /* Red */
+        }
+        .medium-impact {
+            background-color: #ffeb99; /* Yellow */
+        }
+        .low-impact {
+            background-color: #ccffcc; /* Green */
+        }
+    </style>
+</head>
+<body>
+    <h1>Customer Impact Table</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Customer</th>
+                {% for month in months %}
+                <th>{{ month.split('-')[0] }}/{{ month.split('-')[1] }}</th>
+                {% endfor %}
+                <th>Avg</th>
+                <th>Impact</th>
+                <th>Alert</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in data %}
+            <tr>
+                <td>{{ row['CUSTOMER'] }}</td>
+                {% for month in months %}
+                {% set value = row[month] %}
+                <td class="{% if value > 10 %}high-impact{% elif value > 5 %}medium-impact{% else %}low-impact{% endif %}">
+                    {{ value | round(2) }} %
+                </td>
+                {% endfor %}
+                <td>{{ row['Avg'] | round(2) }} %</td>
+                <td>{{ row['Impact'] | round(2) }} %</td>
+                <td>{{ row['Alert'] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
